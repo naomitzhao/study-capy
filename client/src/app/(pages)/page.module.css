@@ -1,0 +1,10 @@
+#homeMain {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#mainHeader {
+    color: brown;
+}
