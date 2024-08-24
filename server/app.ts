@@ -1,8 +1,8 @@
 import recordsRouter from "./routes/recordsRouter.js";
 import usersRouter from "./routes/usersRouter.js";
 
-import express from "express";
-const app = express();
+import express, { Application } from "express";
+const app: Application = express();
 
 app.use(express.json());
 
