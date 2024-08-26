@@ -11,9 +11,17 @@ export default function Stopwatch() {
     const [start, setStart] = useState<number>(0);
     const [active, setActive] = useState(false);
 
+    function setupBeforeUnloadListener() {
+        window.addEventListener("beforeunload", (e) => {
+            e.preventDefault();
+        });
+    }
+
+    useEffect(() => setupBeforeUnloadListener, []);
+
     useEffect(() => {
         let interval: NodeJS.Timeout;
-        if (start && active) {
+        if (active) {
             interval = setInterval(() => {
                 const newSessionTime = Date.now() - start.valueOf();
                 setSessionTime(newSessionTime);
