@@ -28,7 +28,7 @@ export async function getUser(id: number) {
  * @param username The username of the new user.
  */
 export async function createUser(email: string, username: string) {
-    await prisma.users.create({
+    return await prisma.users.create({
         data: {
             email,
             username
@@ -44,9 +44,9 @@ export async function createUser(email: string, username: string) {
  */
 export async function updateUser(id: number, field: string, value: string) {
     if (field === "username") {
-        await updateUserUsername(id, value);
+        return await updateUserUsername(id, value);
     } else if (field === "email") {
-        await updateUserEmail(id, value);
+        return await updateUserEmail(id, value);
     } else {
         throw Error("can only update username or email");
     }
@@ -84,6 +84,10 @@ async function updateUserEmail(id: number, email: string) {
     });
 }
 
+/**
+ * Delete a user from the users table.
+ * @param id The ID of the user to delete.
+ */
 export async function deleteUser(id: number) {
     await prisma.users.delete({
         where: {
