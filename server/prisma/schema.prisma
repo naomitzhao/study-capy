@@ -14,16 +14,17 @@ datasource db {
 }
 
 model users {
-  user_id  Int       @id @default(autoincrement())
-  email    String
-  username String    @unique
-  records  records[]
+  user_id       Int       @id @default(autoincrement())
+  email         String
+  username      String    @unique
+  current_start DateTime?
+  records       records[]
 }
 
 model records {
-  record_id Int      @id @default(autoincrement())
-  startTime DateTime
-  endTime   DateTime
-  author    Int
-  user_id   users    @relation(fields: [author], references: [user_id])
+  record_id  Int      @id @default(autoincrement())
+  start_time DateTime
+  end_time   DateTime
+  author     Int
+  user_id    users    @relation(fields: [author], references: [user_id])
 }
