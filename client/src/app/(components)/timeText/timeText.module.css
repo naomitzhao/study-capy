@@ -1,0 +1,15 @@
+.timeText {
+    display: flex;
+    font-size: 2rem;
+}
+
+.numberContainer {
+    width: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* background-color: pink; */
+}
+
+.numberContainer > p {
+    text-align: center;
+}

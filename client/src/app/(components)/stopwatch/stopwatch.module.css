@@ -1,0 +1,20 @@
+#stopwatch {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#studyButton {
+    font-size: 1rem;
+    padding: 8px 16px;
+    /* todo: use color from palette */
+    background-color: pink;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+#studyButton:hover {
+    /* todo: use color from palette */
+    background-color: rgb(255, 208, 215);
+}
