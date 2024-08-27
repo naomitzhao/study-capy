@@ -1,4 +1,23 @@
 * {
-  padding: 0; 
+  padding: 0;
   margin: 0;
+}
+
+:root {
+  --background-primary: #f5f9ff;
+  --background-secondary: #e3e9f2;
+  --background-tertiary: #d6dde8;
+  --background-quaternary: #c2cbd9;
+
+  --orange-1: #ff7d3c;
+  --orange-2: #f07132;
+
+  --text-primary: #1e3656;
+
+  --padding-xs: 8px;
+  --padding-s: 16px;
+  --padding-m: 32px;
+  --padding-l: 64px;
+
+  color: var(--text-primary);
 }

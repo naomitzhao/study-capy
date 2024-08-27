@@ -1,0 +1,28 @@
+.navLink {
+    --navLink-padding-vertical: 10px;
+    --navLink-padding-horizontal: 20px;
+    --border-width: 2px;
+
+    flex: 1;
+    color: var(--text-primary);
+    padding: var(--navLink-padding-vertical) var(--navLink-padding-horizontal);
+    width: auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.navLink:hover {
+    background-color: var(--background-quaternary);
+}
+
+.selectedLink {
+    border: var(--border-width) solid var(--text-primary);
+    padding: calc(var(--navLink-padding-vertical) - var(--border-width)) calc(var(--navLink-padding-horizontal) - var(--border-width));
+
+    background-color: var(--background-quaternary);
+}

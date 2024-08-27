@@ -2,61 +2,26 @@
 
 import TimeText from "../timeText/timeText";
 import styles from "./stopwatch.module.css";
-import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
-export default function Stopwatch() {
-    const [time, setTime] = useState(0);
-    const [prevTime, setPrevTime] = useState(0);
-    const [sessionTime, setSessionTime] = useState(0);
-    const [start, setStart] = useState<number>(0);
-    const [active, setActive] = useState(false);
+interface StopwatchProps {
+    time: number,
+    active: boolean,
+    sessionTime: number,
+    endStudy: Function,
+}
 
-    function setupBeforeUnloadListener() {
-        window.addEventListener("beforeunload", (e) => {
-            e.preventDefault();
-        });
-    }
-
-    useEffect(() => setupBeforeUnloadListener, []);
-
-    useEffect(() => {
-        let interval: NodeJS.Timeout;
-        if (active) {
-            interval = setInterval(() => {
-                const newSessionTime = Date.now() - start.valueOf();
-                setSessionTime(newSessionTime);
-                setTime(prevTime + newSessionTime);
-            }, 100);
-        }
-        return () => {
-            clearInterval(interval)
-        };
-    }, [prevTime, sessionTime, start, active]);
-
-    function handleButtonPress() {
-        if (active) {
-            setActive(false);
-            const newTime = Math.floor(time / 1000) * 1000
-            setTime(newTime)
-            setPrevTime(newTime);
-            setSessionTime(0);
-        } else {
-            setStart(Date.now());
-            setActive(true);
-        }
-    }
-
+export default function Stopwatch({ time, active, sessionTime, endStudy }: StopwatchProps) {
     return (
         <div id={styles.stopwatch}>
-            <div>
-                <h3>total study time</h3>
-                <TimeText milliseconds={time}></TimeText>
+            <div className={styles.mainTime}>
+                <h2>today</h2>
+                <TimeText milliseconds={time} extraStyle={styles.largeTime}></TimeText>
             </div>
-            <div>
+            <div className={(active)? styles.showSession : styles.hideSession}>
                 <h3>this session</h3>
-                <TimeText milliseconds={sessionTime}></TimeText>
+                <TimeText milliseconds={sessionTime} extraStyle={styles.smallTime}></TimeText>
             </div>
-            <button id={styles.studyButton} onClick={ () => handleButtonPress() }>start / stop</button>
         </div>
     );
 }
