@@ -5,6 +5,7 @@ import Stopwatch from "../../(components)/stopwatch/stopwatch";
 import Sidebar from "../../(components)/sidebar/sidebar";
 import Categories from "../../(components)/categories/categories";
 import React, { useState, useEffect } from "react";
+import SessionLog from "../../(components)/sessionLog/sessionLog";
 
 const categories = new Map();  // key: category name, value: index of that category's time in times
 categories.set("school", 0);
@@ -116,10 +117,9 @@ export default function Page() {
         if (currentCategory == null) {
             throw Error("Tried to end study session but currentCategory was null.");
         }
-        const newTime = categories.get(currentCategory) + Math.floor(sessionTime / 1000) * 1000;
-        const newTimes = [...times];
         const categoryIdx = categories.get(currentCategory);
-        newTimes[categoryIdx] = newTime;
+        const newTimes = [...times];
+        newTimes[categoryIdx] = Math.floor(newTimes[categoryIdx] / 1000) * 1000;
         setTimes(newTimes);
         setCurrentCategory(null);
         setSessionTime(0);
@@ -160,10 +160,13 @@ export default function Page() {
                 <div id={styles.hero}>
                     <h1 id={styles.greeting}>good {getTimeOfDay()}, naomi</h1>
                 </div>
-                <main id={styles.main}>
-                    <Stopwatch time={getTotalMilliseconds()} active={(categories != null)} sessionTime={sessionTime} endStudy={endStudy} />
+                <div id={styles.mainContent}>
+                    <div id={styles.stopwatchContainer}>
+                        <Stopwatch time={getTotalMilliseconds()} sessionTime={sessionTime} endStudy={endStudy} />
+                    </div>
                     <Categories toggleStudyFunction={toggleStudy} categories={categories} times={times} currentCategory={currentCategory}/>
-                </main>
+                    <SessionLog />
+                </div>
             </div>
 
         </div>

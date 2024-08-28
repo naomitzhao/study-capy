@@ -6,21 +6,30 @@ import Image from "next/image";
 
 interface StopwatchProps {
     time: number,
-    active: boolean,
     sessionTime: number,
     endStudy: Function,
 }
 
-export default function Stopwatch({ time, active, sessionTime, endStudy }: StopwatchProps) {
+export default function Stopwatch({ time, sessionTime, endStudy }: StopwatchProps) {
     return (
-        <div id={styles.stopwatch}>
-            <div className={styles.mainTime}>
-                <h2>today</h2>
-                <TimeText milliseconds={time} extraStyle={styles.largeTime}></TimeText>
-            </div>
-            <div className={(active)? styles.showSession : styles.hideSession}>
-                <h3>this session</h3>
-                <TimeText milliseconds={sessionTime} extraStyle={styles.smallTime}></TimeText>
+        <div>
+            <div id={styles.stopwatch}>
+                <div id={styles.studyButtonContainer}>
+                    { sessionTime != 0 && <button className={styles.studyButton} onClick={() => endStudy()}>
+                        <Image src={"/icons/pause.svg"} height={40} width={40} alt={"Pause icon"} />
+                    </button> }
+                </div>
+                <div id={styles.times}>
+                    <div className={styles.mainTime}>
+                        <TimeText milliseconds={time} extraStyle={styles.largeTime}></TimeText>
+                    </div>
+                </div>
+                <div id={styles.thisSessionContainer}>
+                        { sessionTime != 0 && <div className={styles.session}>
+                            <p>this session:</p>
+                            <TimeText milliseconds={sessionTime} extraStyle={styles.smallTime}></TimeText>
+                        </div> }
+                    </div>
             </div>
         </div>
     );

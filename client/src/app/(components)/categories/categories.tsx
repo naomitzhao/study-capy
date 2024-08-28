@@ -22,7 +22,7 @@ export default function Categories({ toggleStudyFunction, categories, times, cur
             newOrderedCategories[categoryIdx] = categoryName;
         });
         setOrderedCategories(newOrderedCategories);
-    }, []);
+    }, [categories]);
 
     return (
         <div id={styles.categories}>
