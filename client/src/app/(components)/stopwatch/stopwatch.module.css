@@ -1,6 +1,6 @@
 #stopwatch {
-    display: grid;
-    grid-template: 2fr 1fr / 50px 1fr;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 0 var(--padding-m);
 

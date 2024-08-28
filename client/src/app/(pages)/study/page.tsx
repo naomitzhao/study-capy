@@ -49,17 +49,19 @@ export default function Page() {
         const addPageSwitchListeners = () => {
             alert("left");
         }
-        const elements = document.querySelectorAll("a");
-        elements.forEach((element) => {
-            element.addEventListener("click", addPageSwitchListeners);
-        });
 
-        return () => {
+        if (currentCategory) {
+            const elements = document.querySelectorAll("a");
             elements.forEach((element) => {
-                element.removeEventListener("click", addPageSwitchListeners);
-            })
+                element.addEventListener("click", addPageSwitchListeners);
+            });
+            return () => {
+                elements.forEach((element) => {
+                    element.removeEventListener("click", addPageSwitchListeners);
+                })
+            }
         }
-    });
+    }, [currentCategory]);
 
     /**
      * When currently studying, compare current time to start time every 0.1 seconds
@@ -165,7 +167,7 @@ export default function Page() {
                         <Stopwatch time={getTotalMilliseconds()} sessionTime={sessionTime} endStudy={endStudy} />
                     </div>
                     <Categories toggleStudyFunction={toggleStudy} categories={categories} times={times} currentCategory={currentCategory}/>
-                    <SessionLog />
+                    <SessionLog extraStyle={styles.sessionLog}/>
                 </div>
             </div>
 

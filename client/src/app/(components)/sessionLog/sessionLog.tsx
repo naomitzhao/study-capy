@@ -1,9 +1,11 @@
 import SessionCard from "../sessionCard/sessionCard";
 import styles from "./sessionLog.module.css";
 
+interface SessionLogProps {
+    extraStyle?: Object
+}
 
-
-export default function SessionLog() {
+export default function SessionLog({ extraStyle }: SessionLogProps) {
     const defaultSessions = [
         {
             category: "other",
@@ -26,7 +28,7 @@ export default function SessionLog() {
     ];
 
     return (
-        <div id={styles.sessionLog}>
+        <div className={styles.sessionLog + " " + extraStyle}>
             <h2>today&apos;s sessions</h2>
             <div id={styles.sessionList}>
                 { defaultSessions.map((session) => {

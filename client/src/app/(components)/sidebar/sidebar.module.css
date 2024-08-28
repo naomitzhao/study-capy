@@ -1,3 +1,7 @@
+#sidebarHeading {
+    font-size: 2rem;
+}
+
 #sidebar {
     display: flex;
     flex-direction: column;

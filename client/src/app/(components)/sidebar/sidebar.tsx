@@ -9,7 +9,7 @@ interface SidebarProps {
 export default function Sidebar({ selected }: SidebarProps) {
     return (
         <div id={styles.sidebar}>
-            <h1>study capy</h1>
+            <h1 id={styles.sidebarHeading}>study capy</h1>
             <nav>
                 <ul id={styles.navLinks}>
                     <li>
@@ -19,10 +19,10 @@ export default function Sidebar({ selected }: SidebarProps) {
                         <NavLink page="groups" selected={selected=="groups"}></NavLink>
                     </li>
                     <li>
-                        <NavLink page="leaderboard" selected={selected=="leaderboard"}></NavLink>
+                        <NavLink page="friends" selected={selected=="friends"}></NavLink>
                     </li>
                     <li>
-                        <NavLink page="friends" selected={selected=="friends"}></NavLink>
+                        <NavLink page="leaderboard" selected={selected=="leaderboard"}></NavLink>
                     </li>
                     <li>
                         <NavLink page="profile" selected={selected=="profile"}></NavLink>

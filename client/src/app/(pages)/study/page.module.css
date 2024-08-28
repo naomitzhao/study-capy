@@ -29,18 +29,21 @@
 
     padding: var(--padding-m);
     display: grid;
-    grid-template: 200px 1fr / 2fr 3fr;
-    gap: var(--padding-s);
+    grid-template: 200px 1fr / 3fr 1fr;
+    gap: var(--padding-m);
 
     background-color: var(--background-primary);
-    /* border: 1px solid blue; */
 }
 
 #stopwatchContainer {
-    grid-area: 1 / 1 / 2 / 3;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     border: 2px solid var(--background-tertiary);
     background-color: white;
+}
+
+.sessionLog {
+    grid-area: 2 / 2 / 3 / 3;
 }

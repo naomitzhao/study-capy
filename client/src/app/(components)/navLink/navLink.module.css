@@ -1,6 +1,6 @@
 .navLink {
-    --navLink-padding-vertical: 10px;
-    --navLink-padding-horizontal: 20px;
+    --navLink-padding-vertical: var(--padding-s);
+    --navLink-padding-horizontal: var(--padding-s);
     --border-width: 2px;
 
     flex: 1;
