@@ -44,6 +44,22 @@ export default function Page() {
         }
     }, [currentCategory]);
 
+    useEffect(() => {
+        const addPageSwitchListeners = () => {
+            alert("left");
+        }
+        const elements = document.querySelectorAll("a");
+        elements.forEach((element) => {
+            element.addEventListener("click", addPageSwitchListeners);
+        });
+
+        return () => {
+            elements.forEach((element) => {
+                element.removeEventListener("click", addPageSwitchListeners);
+            })
+        }
+    });
+
     /**
      * When currently studying, compare current time to start time every 0.1 seconds
      * And update times
@@ -63,7 +79,7 @@ export default function Page() {
         return () => {
             clearInterval(interval);
         };
-    }, [currentCategory, sessionTime]);
+    }, [currentCategory, sessionTime, oldTime, start, times]);
 
     /**
      * If currently studying and a new category is selected, switch categories.
@@ -72,7 +88,6 @@ export default function Page() {
      * @param category String representing the category to toggle to / off.
      */
     function toggleStudy(category: string) {
-        console.log(category);
         if (currentCategory == category) {
             endStudy();
         } else if (currentCategory) {
@@ -107,6 +122,7 @@ export default function Page() {
         newTimes[categoryIdx] = newTime;
         setTimes(newTimes);
         setCurrentCategory(null);
+        setSessionTime(0);
     }
 
     /**

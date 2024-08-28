@@ -3,7 +3,7 @@ import styles from "./sidebar.module.css";
 
 
 interface SidebarProps {
-    selected: string
+    selected: string,
 }
 
 export default function Sidebar({ selected }: SidebarProps) {

@@ -19,7 +19,6 @@ export default function Categories({ toggleStudyFunction, categories, times, cur
     useEffect(() => {
         const newOrderedCategories: string[] = new Array(categories.size);
         categories.forEach((categoryIdx, categoryName) => {
-            console.log(categoryName, categoryIdx);
             newOrderedCategories[categoryIdx] = categoryName;
         });
         setOrderedCategories(newOrderedCategories);
