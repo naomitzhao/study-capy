@@ -6,6 +6,7 @@ import Sidebar from "../../(components)/sidebar/sidebar";
 import Categories from "../../(components)/categories/categories";
 import React, { useState, useEffect } from "react";
 import SessionLog from "../../(components)/sessionLog/sessionLog";
+import ActivityPanel from "../../(components)/activityPanel/activityPanel";
 
 const categories = new Map();  // key: category name, value: index of that category's time in times
 categories.set("school", 0);
@@ -167,6 +168,7 @@ export default function Page() {
                         <Stopwatch time={getTotalMilliseconds()} sessionTime={sessionTime} endStudy={endStudy} />
                     </div>
                     <Categories toggleStudyFunction={toggleStudy} categories={categories} times={times} currentCategory={currentCategory}/>
+                    <ActivityPanel />
                     <SessionLog extraStyle={styles.sessionLog}/>
                 </div>
             </div>
