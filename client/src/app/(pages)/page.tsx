@@ -6,7 +6,7 @@ export default function Home() {
       <header id={styles.header}><h2>study capy</h2></header>
       <div id={styles.hero}>
         <h1>this is a hero with a cute picture</h1>
-        <button>sign in</button>
+        <button>sign up</button>
       </div>
       <main id={styles.content}>
         <p>here is some more info...</p>

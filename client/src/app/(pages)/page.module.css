@@ -25,6 +25,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
+    gap: var(--padding-m);
     padding: var(--padding-m);
 }
 
