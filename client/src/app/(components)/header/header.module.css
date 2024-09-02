@@ -1,0 +1,10 @@
+#header {
+    height: var(--header-height);
+    padding: var(--padding-s);
+
+    background-color: var(--text-primary);
+    color: white;
+
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,61 @@
+#page {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#content {
+    min-height: calc(100vh - var(--header-height) - var(--footer-height) - 4 * var(--padding-m));
+    background-color: var(--background-primary);
+    padding: var(--padding-m);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--padding-m);
+}
+
+#logInForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--padding-m);
+}
+
+#formInputs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-s);
+}
+
+#formInputs > input {
+    font-size: 1.125rem;
+    padding: var(--padding-s);
+    background-color: white;
+    border: 2px solid var(--background-tertiary);
+    border-radius: var(--padding-xs);
+    width: 300px;
+    outline: none;
+    color: var(--text-primary);
+}
+
+#formInputs > input:focus {
+    border: 2px solid var(--text-secondary);
+}
+
+#formButton {
+    background-color: var(--text-primary);
+    padding: var(--padding-xs) var(--padding-m);
+    border-radius: var(--padding-m);
+    color: white;
+    font-size: 1.125rem;
+    border: none;
+}
+
+#signUpLink {
+    color: var(--text-primary);
+}
+
+#signUpLink:visited {
+    color: var(--orange-1);
+}
