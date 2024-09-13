@@ -28,21 +28,6 @@
     gap: var(--padding-s);
 }
 
-#formInputs > input {
-    font-size: 1.125rem;
-    padding: var(--padding-s);
-    background-color: white;
-    border: 2px solid var(--background-tertiary);
-    border-radius: var(--padding-xs);
-    width: 300px;
-    outline: none;
-    color: var(--text-primary);
-}
-
-#formInputs > input:focus {
-    border: 2px solid var(--text-secondary);
-}
-
 #formButton {
     background-color: var(--text-primary);
     padding: var(--padding-xs) var(--padding-m);
