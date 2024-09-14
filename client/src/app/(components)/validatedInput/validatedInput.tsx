@@ -5,10 +5,10 @@ interface ValidatedInputProps {
     field: string,
     chosenPassword?: string,
     setPassword?: Function,
-    changeErrors: Function,
+    changeValids: Function,
 }
 
-export default function ValidatedInput({ field, chosenPassword, setPassword, changeErrors } : ValidatedInputProps) {
+export default function ValidatedInput({ field, chosenPassword, setPassword, changeValids } : ValidatedInputProps) {
     const EMAIL_REG_EXP: RegExp = /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; // min example: a@a
     const SPECIAL_CHAR_REG_EX: RegExp = /(?=.*[*.!@$%^&(){}[\]:;<>,.?\/~_+\-=|\\])/;
     const LOWERCASE_LETTER_REG_EX: RegExp = /(?=.*[a-z])/;
@@ -71,7 +71,6 @@ export default function ValidatedInput({ field, chosenPassword, setPassword, cha
             placeholder={field} 
             className={(errorMessages.length == 0) ? [styles.formInput].join(' ') : [styles.formInput, styles.invalidInput].join(' ')}
             onChange={(e) => {
-                const pastErrors = errorMessages.length != 0;
                 let currErrors: Array<string> = [];
                 if (field == "email") {
                     currErrors = validateEmail(e.target.value);
@@ -83,10 +82,10 @@ export default function ValidatedInput({ field, chosenPassword, setPassword, cha
                     currErrors = validateConfirmPassword(e.target.value);
                 }
                 setErrorMessages(currErrors);
-                if (currErrors.length != 0 && !pastErrors) {
-                    changeErrors(1);
-                } else if (currErrors.length == 0 && pastErrors) {
-                    changeErrors(-1);
+                if (currErrors.length != 0) {
+                    changeValids(field, false);
+                } else if (currErrors.length == 0) {
+                    changeValids(field, true);
                 }
             }}/>
             { errorMessages.map((message) => {

@@ -9,14 +9,34 @@ import ValidatedInput from "../../(components)/validatedInput/validatedInput";
 
 export default function Page() {
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState(0);
+    const [valids, setValids] = useState([false, false, false, false]);
 
-    function changeErrors(value: number) {
-        setErrors(errors + value);
+    function changeValids(fieldName: string, state: boolean) {
+        const newValids = valids;
+        let idx = -1;
+        if (fieldName == "email") {
+            idx = 0;
+        } else if (fieldName == "username") {
+            idx = 1;
+        } else if (fieldName == "password") {
+            idx = 2;
+        } else if (fieldName == "confirm password") {
+            idx = 3;
+        } else {
+            throw Error("something went wrong :(");
+        }
+        newValids[idx] = state;
+        setValids(newValids);
     }
-    
-    function isValidSubmit(e: Event) {
-        console.log(e);
+
+    function validsSum() {
+        let sum = 0;
+        for (let i = 0; i < valids.length; i++){
+            if (valids[i]) {
+                sum += 1;
+            }
+        }
+        return sum;
     }
 
     return (
@@ -26,13 +46,13 @@ export default function Page() {
                 <h1>sign up</h1>
                 <form id={styles.logInForm}>
                     <div id={styles.formInputs}>
-                        <ValidatedInput field="email" changeErrors={changeErrors}></ValidatedInput>
-                        <ValidatedInput field="username" changeErrors={changeErrors}></ValidatedInput>
-                        <ValidatedInput field="password" setPassword={setPassword} changeErrors={changeErrors}></ValidatedInput>
-                        <ValidatedInput field="confirm password" chosenPassword={password} changeErrors={changeErrors}></ValidatedInput>
+                        <ValidatedInput field="email" changeValids={changeValids}></ValidatedInput>
+                        <ValidatedInput field="username" changeValids={changeValids}></ValidatedInput>
+                        <ValidatedInput field="password" setPassword={setPassword} changeValids={changeValids}></ValidatedInput>
+                        <ValidatedInput field="confirm password" chosenPassword={password} changeValids={changeValids}></ValidatedInput>
                     </div>
                     <button id={styles.formButton} onClick={(e) => {
-                        if (errors) {
+                        if (validsSum() != 4) {
                             e.preventDefault();
                         }
                     }}>sign up</button>
