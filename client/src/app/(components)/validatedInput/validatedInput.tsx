@@ -18,18 +18,29 @@ export default function ValidatedInput({ field, chosenPassword, setPassword, cha
     const [errorMessages, setErrorMessages] = useState<Array<string>>([]);
     const [value, setValue] = useState("");
 
+    const takenUsernames = ["naomizhao", "naomiz", "naomi"];
+
     useEffect(() => {
         if (field == "confirm password") {
             setErrorMessages(validateConfirmPassword(value));
         }
     }, [chosenPassword])
 
+    // todo: have this use database
     function validateEmail(value: string): Array<string> {
         if (EMAIL_REG_EXP.test(value)) {
             return [];
         } else {
-            return ["Must enter valid email."];
+            return ["must enter valid email."];
         }
+    }
+
+    // todo: have this use database
+    function validateUsername(value: string): Array<string> {
+        if (takenUsernames.includes(value)) {
+            return ["username is taken."];
+        }
+        return [];
     }
 
     function validatePassword(value: string): Array<string> {
@@ -74,6 +85,8 @@ export default function ValidatedInput({ field, chosenPassword, setPassword, cha
                 let currErrors: Array<string> = [];
                 if (field == "email") {
                     currErrors = validateEmail(e.target.value);
+                } else if (field == "username") {
+                    currErrors = validateUsername(e.target.value);
                 } else if (field == "password" && setPassword != null) {
                     setPassword(e.target.value);
                     currErrors = validatePassword(e.target.value);

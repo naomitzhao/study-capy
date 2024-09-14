@@ -44,3 +44,7 @@
 #signUpLink:visited {
     color: var(--orange-1);
 }
+
+.errorMessage {
+    color: var(--error-message);
+}

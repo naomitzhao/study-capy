@@ -10,6 +10,7 @@ import ValidatedInput from "../../(components)/validatedInput/validatedInput";
 export default function Page() {
     const [password, setPassword] = useState("");
     const [valids, setValids] = useState([false, false, false, false]);
+    const [error, setError] = useState("");
 
     function changeValids(fieldName: string, state: boolean) {
         const newValids = valids;
@@ -44,6 +45,7 @@ export default function Page() {
             <Header />
             <div id={styles.content}>
                 <h1>sign up</h1>
+                <p className={styles.errorMessage}>{error}</p>
                 <form id={styles.logInForm}>
                     <div id={styles.formInputs}>
                         <ValidatedInput field="email" changeValids={changeValids}></ValidatedInput>
@@ -52,9 +54,12 @@ export default function Page() {
                         <ValidatedInput field="confirm password" chosenPassword={password} changeValids={changeValids}></ValidatedInput>
                     </div>
                     <button id={styles.formButton} onClick={(e) => {
+                        e.preventDefault();
                         if (validsSum() != 4) {
-                            e.preventDefault();
+                            setError("please fill in all forms.");
+                            return;
                         }
+                        console.log("success");
                     }}>sign up</button>
                 </form>
                 <p>have an account already? <Link href="log-in" id={styles.signUpLink}>log in</Link></p>
