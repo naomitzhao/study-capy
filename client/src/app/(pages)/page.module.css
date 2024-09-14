@@ -19,13 +19,14 @@
     font-size: 4rem;
 }
 
-#hero > button {
-    padding: var(--padding-xs) var(--padding-s);
+#hero > a {
+    padding: var(--padding-xs) var(--padding-m);
     font-size: 1.125rem;
     border: none;
     color: white;
     background-color: var(--text-primary);
     border-radius: var(--padding-s);
+    text-decoration: none;
 }
 
 #content {

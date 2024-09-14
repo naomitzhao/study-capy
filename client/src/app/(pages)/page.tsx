@@ -8,7 +8,7 @@ export default function Home() {
       <Header />
       <div id={styles.hero}>
         <h1>this is a hero with a cute picture</h1>
-        <button>join now!</button>
+        <a href="/sign-up">join now!</a>
       </div>
       <main id={styles.content}>
         <p>here is some more info...</p>
