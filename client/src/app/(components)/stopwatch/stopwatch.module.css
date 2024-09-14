@@ -1,20 +1,68 @@
 #stopwatch {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    align-items: center;
+    gap: 0 var(--padding-m);
+
+    padding: var(--padding-m);
+    border-radius: 4px;
 }
 
-#studyButton {
+
+.mainTime {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-m);
+}
+
+#thisSessionContainer {
+    grid-area: 2 / 2 / 3 / 3;
+
+    height: 30px;
+    display: flex;
+    align-items: center;
+
+    color: var(--text-secondary);
+}
+
+.session {
+    display: flex;
+    gap: var(--padding-xs);
+}
+
+.session > p {
+    font-size: 1.25rem;
+}
+
+.largeTime {
+    font-size: 4rem;
+}
+
+.smallTime {
+    font-size: 1.25rem;
+}
+
+#studyButtonContainer {
+    height: 50px;
+    width: 50px;
+}
+
+.studyButton {
     font-size: 1rem;
-    padding: 8px 16px;
-    /* todo: use color from palette */
-    background-color: pink;
+    height: 50px;
+    width: 50px;
+    background-color: var(--orange-1);
     border: none;
-    border-radius: 16px;
+    border-radius: 25px;
     cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 #studyButton:hover {
-    /* todo: use color from palette */
-    background-color: rgb(255, 208, 215);
+    background-color: var(--orange-2);
 }
+

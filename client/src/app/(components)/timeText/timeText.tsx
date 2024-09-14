@@ -1,29 +1,40 @@
 import styles from "./timeText.module.css";
 
 interface TimeTextProps {
-    milliseconds: number
+    milliseconds: number,
+    extraStyle?: Object;
 }
 
-export default function TimeText(props: TimeTextProps) {
-    const milliseconds = props.milliseconds;
-
+export default function TimeText({ milliseconds, extraStyle}: TimeTextProps) {
+    /**
+     * From a number of milliseconds, calculate how many hours to display for that time
+     * @param milliseconds A number; the number of milliseconds to convert
+     * @returns Number: The number of hours to display
+     */
     function formatHours(milliseconds: number) {
         return Math.floor(milliseconds / 3600000) % 60;
-        // return ("0" + hours).slice(-2);
     }
 
+    /**
+     * From a number of milliseconds, calculate how many minutes to display for that time
+     * @param milliseconds A number; the number of milliseconds to convert
+     * @returns Number: The number of minutes to display
+     */
     function formatMinutes(milliseconds: number) {
         return Math.floor(milliseconds / 60000) % 60;
-        // return ("0" + minutes).slice(-2);
     }
 
+    /**
+     * From a number of milliseconds, calculate how many seconds to display for that time
+     * @param milliseconds A number; the number of milliseconds to convert
+     * @returns Number: The number of seconds to display
+     */
     function formatSeconds(milliseconds: number) {
         return Math.floor(milliseconds / 1000) % 60;
-        // return ("0" + seconds).slice(-2);
     }
 
     return (
-        <div className={styles.timeText}>
+        <div className={styles.timeText + ' ' + extraStyle}>
             <div className={styles.numberContainer}>
                 <p>{ Math.floor(formatHours(milliseconds) / 10) }</p>
                 <p>{formatHours(milliseconds) % 10}</p>

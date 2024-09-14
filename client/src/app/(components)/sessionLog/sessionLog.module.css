@@ -1,0 +1,18 @@
+.sessionLog {
+    padding: var(--padding-s);
+    border-radius: 4px;
+    border: 2px solid var(--background-tertiary);
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-s);
+    
+    overflow: auto;
+}
+
+#sessionList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-xs);
+}

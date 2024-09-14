@@ -2,61 +2,41 @@
 
 import TimeText from "../timeText/timeText";
 import styles from "./stopwatch.module.css";
-import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
-export default function Stopwatch() {
-    const [time, setTime] = useState(0);
-    const [prevTime, setPrevTime] = useState(0);
-    const [sessionTime, setSessionTime] = useState(0);
-    const [start, setStart] = useState<number>(0);
-    const [active, setActive] = useState(false);
+interface StopwatchProps {
+    time: number,
+    sessionTime: number,
+    endStudy: Function,
+}
 
-    function setupBeforeUnloadListener() {
-        window.addEventListener("beforeunload", (e) => {
-            e.preventDefault();
-        });
-    }
-
-    useEffect(() => setupBeforeUnloadListener, []);
-
-    useEffect(() => {
-        let interval: NodeJS.Timeout;
-        if (active) {
-            interval = setInterval(() => {
-                const newSessionTime = Date.now() - start.valueOf();
-                setSessionTime(newSessionTime);
-                setTime(prevTime + newSessionTime);
-            }, 100);
-        }
-        return () => {
-            clearInterval(interval)
-        };
-    }, [prevTime, sessionTime, start, active]);
-
-    function handleButtonPress() {
-        if (active) {
-            setActive(false);
-            const newTime = Math.floor(time / 1000) * 1000
-            setTime(newTime)
-            setPrevTime(newTime);
-            setSessionTime(0);
+export default function Stopwatch({ time, sessionTime, endStudy }: StopwatchProps) {
+    function handleButtonClick () {
+        if (sessionTime) {
+            endStudy();
         } else {
-            setStart(Date.now());
-            setActive(true);
+            alert("hi");
         }
     }
 
     return (
-        <div id={styles.stopwatch}>
-            <div>
-                <h3>total study time</h3>
-                <TimeText milliseconds={time}></TimeText>
+        <div>
+            <div id={styles.stopwatch}>
+                <div id={styles.times}>
+                    <div className={styles.mainTime}>
+                        <button className={styles.studyButton} onClick={() => handleButtonClick()}>
+                            <Image src={(sessionTime != 0) ? "/icons/pause.svg" : "/icons/play.svg"} height={40} width={40} alt={(sessionTime != 0) ? "Pause icon" : "Play icon"} />
+                        </button>
+                        <TimeText milliseconds={time} extraStyle={styles.largeTime}></TimeText>
+                    </div>
+                </div>
+                <div id={styles.thisSessionContainer}>
+                    { sessionTime != 0 && <div className={styles.session}>
+                        <p>this session:</p>
+                        <TimeText milliseconds={sessionTime} extraStyle={styles.smallTime}></TimeText>
+                    </div> }
+                </div>
             </div>
-            <div>
-                <h3>this session</h3>
-                <TimeText milliseconds={sessionTime}></TimeText>
-            </div>
-            <button id={styles.studyButton} onClick={ () => handleButtonPress() }>start / stop</button>
         </div>
     );
 }

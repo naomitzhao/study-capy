@@ -1,4 +1,36 @@
 * {
-  padding: 0; 
+  padding: 0;
   margin: 0;
+}
+
+:root {
+  --background-primary: #f5f9ff;
+  --background-secondary: #e3e9f2;
+  --background-tertiary: #d6dde8;
+  --background-quaternary: #c2cbd9;
+
+  --orange-1: #ff7d3c;
+  --orange-2: #f07132;
+
+  --text-primary: #1e3656;
+  --text-secondary: #4f627b;
+
+  --error-message: #c64545;
+
+  --padding-xxs: 4px;
+  --padding-xs: 8px;
+  --padding-s: 16px;
+  --padding-m: 32px;
+  --padding-l: 64px;
+
+  --header-height: 60px;
+  --footer-height: 40px;
+  --hero-height: 500px;
+
+  color: var(--text-primary);
+  font-size: 1.125rem;
+}
+
+h1 {
+  font-size: 2.5rem;
 }

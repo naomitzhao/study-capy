@@ -1,10 +1,49 @@
-#main {
-    padding: 40px;
+#body {
+    min-height: calc(100vh);
     display: flex;
-    flex-direction: column;
-    align-items: center;
+
+    --hero-height: 80px;
 }
 
-#mainHeader {
-    color: brown;
+#content {
+    flex: 1;
+    height: 100vh;
+}
+
+#hero {
+    height: var(--hero-height);
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: var(--padding-m);
+    background-color: var(--background-secondary);
+}
+
+#hero > h1 {
+    font-size: 2.5rem;
+}
+
+#mainContent {
+    height: calc(100vh - var(--hero-height) - 4 * var(--padding-m));
+
+    padding: var(--padding-m);
+    display: grid;
+    grid-template: 200px 1fr / 3fr 1fr;
+    gap: var(--padding-m);
+
+    background-color: var(--background-primary);
+}
+
+#stopwatchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid var(--background-tertiary);
+    background-color: white;
+}
+
+.sessionLog {
+    grid-area: 2 / 2 / 3 / 3;
 }

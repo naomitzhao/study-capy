@@ -1,10 +1,36 @@
-#homeMain {
-    padding: 40px;
+#page {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 }
 
-#mainHeader {
-    color: brown;
+#hero {
+    background-color: var(--background-tertiary);
+    height: var(--hero-height);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--padding-m);
+    padding: var(--padding-m);
+}
+
+#hero > h1 {
+    font-size: 4rem;
+}
+
+#hero > a {
+    padding: var(--padding-xs) var(--padding-m);
+    font-size: 1.125rem;
+    border: none;
+    color: white;
+    background-color: var(--text-primary);
+    border-radius: var(--padding-s);
+    text-decoration: none;
+}
+
+#content {
+    min-height: calc(100vh - var(--header-height) - var(--footer-height) - 4 * var(--padding-m));
+    background-color: var(--background-primary);
+    padding: var(--padding-m);
 }

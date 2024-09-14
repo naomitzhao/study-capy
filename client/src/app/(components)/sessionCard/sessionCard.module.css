@@ -1,0 +1,15 @@
+.sessionCard {
+    /* border: 1px solid blue; */
+    padding: var(--padding-s);
+    border-radius: var(--padding-xs);
+    background-color: var(--background-secondary);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-xxs);
+}
+
+.subtext {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}

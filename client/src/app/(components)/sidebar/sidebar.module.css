@@ -1,0 +1,25 @@
+#sidebarHeading {
+    font-size: 2rem;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-m);
+
+    width: 200px;
+    background-color: var(--background-tertiary);
+    padding: var(--padding-m);
+}
+
+#navLinks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-xs);
+}
+
+#navLinks > li {
+    list-style-type: none;
+    display: flex;
+    justify-content: stretch;
+}
