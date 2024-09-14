@@ -16,6 +16,13 @@ export default function ValidatedInput({ field, chosenPassword, setPassword, cha
     const NUMBER_REG_EX: RegExp = /(?=.*[0-9])/;
 
     const [errorMessages, setErrorMessages] = useState<Array<string>>([]);
+    const [value, setValue] = useState("");
+
+    useEffect(() => {
+        if (field == "confirm password") {
+            setErrorMessages(validateConfirmPassword(value));
+        }
+    }, [chosenPassword])
 
     function validateEmail(value: string): Array<string> {
         if (EMAIL_REG_EXP.test(value)) {
@@ -66,13 +73,13 @@ export default function ValidatedInput({ field, chosenPassword, setPassword, cha
             onChange={(e) => {
                 const pastErrors = errorMessages.length != 0;
                 let currErrors: Array<string> = [];
-                console.log(pastErrors);
                 if (field == "email") {
                     currErrors = validateEmail(e.target.value);
                 } else if (field == "password" && setPassword != null) {
                     setPassword(e.target.value);
                     currErrors = validatePassword(e.target.value);
                 } else if (field == "confirm password") {
+                    setValue(e.target.value);
                     currErrors = validateConfirmPassword(e.target.value);
                 }
                 setErrorMessages(currErrors);

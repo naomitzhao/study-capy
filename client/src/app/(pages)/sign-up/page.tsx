@@ -14,6 +14,10 @@ export default function Page() {
     function changeErrors(value: number) {
         setErrors(errors + value);
     }
+    
+    function isValidSubmit(e: Event) {
+        console.log(e);
+    }
 
     return (
         <div id={styles.page}>
