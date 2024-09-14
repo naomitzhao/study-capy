@@ -56,7 +56,7 @@ export default function Page() {
                     <button id={styles.formButton} onClick={(e) => {
                         e.preventDefault();
                         if (validsSum() != 4) {
-                            setError("please fill in all forms.");
+                            setError("please fill in all fields.");
                             return;
                         }
                         console.log("success");
