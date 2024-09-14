@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,17 +8,35 @@ datasource db {
 }
 
 model users {
-  user_id       Int       @id @default(autoincrement())
-  email         String
-  username      String    @unique
-  current_start DateTime?
-  records       records[]
+  id               Int                @id @default(autoincrement())
+  email            String
+  username         String             @unique
+  current_start    DateTime?
+  created_at       DateTime           @default(now())
+  records          records[]
+  groupMemberships groupMemberships[]
 }
 
 model records {
-  record_id  Int      @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   start_time DateTime
   end_time   DateTime
-  author     Int
-  user_id    users    @relation(fields: [author], references: [user_id])
+  user_id    Int
+  user       users    @relation(fields: [user_id], references: [id])
+}
+
+model groups {
+  id               Int                @id @default(autoincrement())
+  name             String
+  groupMemberships groupMemberships[]
+  created_at       DateTime           @default(now())
+}
+
+model groupMemberships {
+  id       Int      @id @default(autoincrement())
+  group_id Int
+  group    groups   @relation(fields: [group_id], references: [id])
+  user_id  Int
+  user     users    @relation(fields: [user_id], references: [id])
+  joined   DateTime @default(now())
 }

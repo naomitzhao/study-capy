@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
-import { createRecord, deleteRecord, getAllRecords, getRecord, updateRecordEnd, updateRecordStart } from '../services/recordsService.js';
+import { createGroup, deleteGroup, getAllGroups, getGroup, updateGroupName } from '../services/groupsService.js';
 
 /**
  * 
  * @param req Express Request
  * @param res Express Response
  */
-export const getAllRecordsController = async (req: Request, res: Response) => {
+export const getAllGroupsController = async (req: Request, res: Response) => {
     try {
-        const records = await getAllRecords();
+        const records = await getAllGroups();
         res.status(200).json({
             success: true,
             data: records,
@@ -33,10 +33,10 @@ export const getAllRecordsController = async (req: Request, res: Response) => {
  * @param req Express Request
  * @param res Express Response
  */
-export const getRecordController = async (req: Request, res: Response) => {
+export const getGroupController = async (req: Request, res: Response) => {
     try {
         const id: number = parseInt(req.params.id);
-        const record = await getRecord(id);
+        const record = await getGroup(id);
         res.status(200).send({
             success: true,
             data: record,
@@ -61,12 +61,10 @@ export const getRecordController = async (req: Request, res: Response) => {
  * @param req Express Request
  * @param res Express Response
  */
-export const createRecordController = async (req: Request, res: Response) => {
+export const createGroupController = async (req: Request, res: Response) => {
     try {
-        const start_time: Date = req.body.start_time;
-        const end_time: Date = req.body.end_time;
-        const user_id: number = req.body.user_id;
-        const record = await createRecord(start_time, end_time, user_id);
+        const name: string = req.body.name;
+        const record = await createGroup(name);
         res.status(200).json({
             success: true,
             data: record,
@@ -91,20 +89,17 @@ export const createRecordController = async (req: Request, res: Response) => {
  * @param req Express Request
  * @param res Express Response
  */
-export const updateRecordController = async (req: Request, res: Response) => {
+export const updateGroupController = async (req: Request, res: Response) => {
     try {
         const id: number = parseInt(req.params.id);
         let update_count = 0;
-        if (req.body.hasOwnProperty("start_time")) {
-            updateRecordStart(id, req.body.start_time);
+        if (req.body.hasOwnProperty("name")) {
+            const name: string = req.body.name;
+            updateGroupName(id, name);
             update_count ++;
         }
-        if (req.body.hasOwnProperty("end_time")) {
-            updateRecordEnd(id, req.body.end_time);
-            update_count ++;
-        } 
         if (update_count == 0) {
-            throw Error('No updatable attributes passed in. Valid fields: "start_time", "end_time"')
+            throw Error('No updatable attributes passed in. Valid fields: "name"');
         }
         res.status(200).json({
             success: true,
@@ -129,10 +124,10 @@ export const updateRecordController = async (req: Request, res: Response) => {
  * @param req Express Request
  * @param res Express Response
  */
-export const deleteRecordController = async (req: Request, res: Response) => {
+export const deleteGroupController = async (req: Request, res: Response) => {
     try {
         const id: number = parseInt(req.params.id);
-        await deleteRecord(id);
+        await deleteGroup(id);
         res.status(200).json({
             success: true,
             data: id,

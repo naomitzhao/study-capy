@@ -17,7 +17,7 @@ export async function getAllUsers() {
 export async function getUser(id: number) {
     return await prisma.users.findUnique({
         where: {
-            user_id: id
+            id
         },
     });
 }
@@ -60,7 +60,7 @@ export async function updateUser(id: number, field: string, value: string) {
 async function updateUserUsername(id: number, username: string) {
     await prisma.users.update({
         where: {
-            user_id: id
+            id
         },
         data: {
             username
@@ -76,7 +76,7 @@ async function updateUserUsername(id: number, username: string) {
 async function updateUserEmail(id: number, email: string) {
     await prisma.users.update({
         where: {
-            user_id: id
+            id
         },
         data: {
             email
@@ -91,7 +91,7 @@ async function updateUserEmail(id: number, email: string) {
 export async function deleteUser(id: number) {
     await prisma.users.delete({
         where: {
-            user_id: id
+            id
         }
     })
 }
