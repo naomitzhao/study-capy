@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
  * @returns An array containing all group memberships in the database.
  */
 export async function getAllGroupMemberships() {
-    return await prisma.groupMemberships.findMany();
+    return await prisma.group_memberships.findMany();
 }
 
 /**
@@ -14,7 +14,7 @@ export async function getAllGroupMemberships() {
  * @returns An object representing the group membership.
  */
 export async function getGroupMembership(id: number) {
-    return await prisma.groupMemberships.findUnique({
+    return await prisma.group_memberships.findUnique({
         where: {
             id
         },
@@ -27,7 +27,7 @@ export async function getGroupMembership(id: number) {
  * @returns the newly created group
  */
 export async function createGroupMembership(user_id: number, group_id: number) {
-    return await prisma.groupMemberships.create({
+    return await prisma.group_memberships.create({
         data: {
             user_id,
             group_id
@@ -40,7 +40,7 @@ export async function createGroupMembership(user_id: number, group_id: number) {
  * @param id Integer representing the ID of the membership to delete
  */
 export async function deleteGroupMembership(id: number) {
-    await prisma.groupMemberships.delete({
+    await prisma.group_memberships.delete({
         where: {
             id
         }

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createUser, deleteUser, getAllUsers, getUser, updateUser } from '../services/usersService.js';
+import { createUser, deleteUser, getAllUsers, getUserById, updateUser } from '../services/usersService.js';
 import { body, validationResult } from "express-validator";
 
 /**
@@ -37,7 +37,7 @@ export const getAllUsersController = async (req: Request, res: Response) => {
 export const getUserController = async (req: Request, res: Response) => {
     try {
         const id: number = parseInt(req.params.id);
-        const user = await getUser(id);
+        const user = await getUserById(id);
         res.status(200).json({
             success: true,
             data: user,
@@ -79,7 +79,8 @@ export const createUserController = async (req: Request, res: Response) => {
     try {
         const email: string = req.body.email;
         const username: string = req.body.username;
-        const user = await createUser(email, username);
+        const password: string = req.body.password;
+        const user = await createUser(email, username, password);
         res.status(200).json({
             success: true,
             data: user,

@@ -8,13 +8,14 @@ datasource db {
 }
 
 model users {
-  id               Int                @id @default(autoincrement())
-  email            String
-  username         String             @unique
-  current_start    DateTime?
-  created_at       DateTime           @default(now())
-  records          records[]
-  groupMemberships groupMemberships[]
+  id                Int                 @id @default(autoincrement())
+  email             String
+  username          String              @unique
+  password          String
+  current_start     DateTime?
+  created_at        DateTime            @default(now())
+  records           records[]
+  group_memberships group_memberships[]
 }
 
 model records {
@@ -26,13 +27,13 @@ model records {
 }
 
 model groups {
-  id               Int                @id @default(autoincrement())
-  name             String
-  groupMemberships groupMemberships[]
-  created_at       DateTime           @default(now())
+  id                Int                 @id @default(autoincrement())
+  name              String
+  group_memberships group_memberships[]
+  created_at        DateTime            @default(now())
 }
 
-model groupMemberships {
+model group_memberships {
   id       Int      @id @default(autoincrement())
   group_id Int
   group    groups   @relation(fields: [group_id], references: [id])

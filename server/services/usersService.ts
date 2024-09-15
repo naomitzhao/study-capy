@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 /**
@@ -14,10 +15,18 @@ export async function getAllUsers() {
  * @param id User ID of the user to get
  * @returns An object representing the user.
  */
-export async function getUser(id: number) {
+export async function getUserById(id: number) {
     return await prisma.users.findUnique({
         where: {
             id
+        },
+    });
+}
+
+export async function getUserByUsername(username: string) {
+    return await prisma.users.findUnique({
+        where: {
+            username
         },
     });
 }
@@ -27,11 +36,13 @@ export async function getUser(id: number) {
  * @param email The email of the new user.
  * @param username The username of the new user.
  */
-export async function createUser(email: string, username: string) {
+export async function createUser(email: string, username: string, password: string) {
+    const hashedPassword = await bcrypt.hash(password, 10);
     return await prisma.users.create({
         data: {
             email,
-            username
+            username,
+            password: hashedPassword,
         }
     });
 }
