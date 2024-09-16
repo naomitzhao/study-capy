@@ -17,7 +17,7 @@ export async function getAllRecords() {
 export async function getRecord(id: number) {
     return await prisma.records.findUnique({
         where: {
-            record_id: id
+            id
         },
     });
 }
@@ -29,12 +29,12 @@ export async function getRecord(id: number) {
  * @param author The ID of the user that owns the record.
  * @returns The newly created record.
  */
-export async function createRecord(start_time: Date, end_time: Date, author: number) {
+export async function createRecord(start_time: Date, end_time: Date, user_id: number) {
     return await prisma.records.create({
         data: {
             start_time,
             end_time,
-            author
+            user_id
         }
     });
 }
@@ -47,7 +47,7 @@ export async function createRecord(start_time: Date, end_time: Date, author: num
 export async function updateRecordStart(id: number, start_time: Date) {
     await prisma.records.update({
         where: {
-            record_id: id
+            id
         },
         data: {
             start_time
@@ -63,7 +63,7 @@ export async function updateRecordStart(id: number, start_time: Date) {
 export async function updateRecordEnd(id: number, end_time: Date) {
     await prisma.records.update({
         where: {
-            record_id: id
+            id
         },
         data: {
             end_time
@@ -78,7 +78,7 @@ export async function updateRecordEnd(id: number, end_time: Date) {
 export async function deleteRecord(id: number) {
     await prisma.records.delete({
         where: {
-            record_id: id
+            id
         }
     })
 }
