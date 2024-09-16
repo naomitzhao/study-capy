@@ -6,13 +6,20 @@ import usersRouter from "./routes/usersRouter.js";
 import express, { Application, Request, Response } from "express";
 import passport from "passport";
 import session from "express-session";
+import cors from "cors";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
 import { getUserByUsername, getUserById } from "./services/usersService.js";
 
 const app: Application = express();
 
+const corsOptions = {
+    origin: "http://localhost:3001",
+    optionsSuccessStatus: 200
+}
+
 app.use(express.json());
+app.use(cors());
 
 app.use(
     session({
