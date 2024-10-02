@@ -12,6 +12,9 @@ export default function Page() {
         }
         e.preventDefault();
         console.log(e);
+        if (!e.target) {
+            return (<div>error D:</div>);
+        }
         console.log(e.target.elements[0].value);
         console.log(e.target.elements[1].value)
 
