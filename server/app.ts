@@ -13,19 +13,23 @@ import { getUserByUsername, getUserById } from "./services/usersService.js";
 
 const app: Application = express();
 
-const corsOptions = {
+app.use(cors({
     origin: "http://localhost:3001",
-    optionsSuccessStatus: 200
-}
+    credentials: true
+}));
 
 app.use(express.json());
-app.use(cors());
 
 app.use(
     session({
         secret: process.env.SESSION_SECRET ?? (() => { throw new Error("session secret is required"); })(),
         resave: false,
         saveUninitialized: false,
+        cookie: {
+            secure: false,
+            httpOnly: true,
+            sameSite: "lax",
+        }
     })
 );
 

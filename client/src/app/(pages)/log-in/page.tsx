@@ -4,30 +4,30 @@ import Footer from "../../(components)/footer/footer";
 import Header from "../../(components)/header/header";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { navigateStudy } from "../../(util)/actions";
 
 export default function Page() {
     async function handleSubmit(e: Event) {
-        if (!e) {
-            throw new Error("something went wrong :(");
-        }
         e.preventDefault();
-        console.log(e);
-        if (!e.target) {
-            return (<div>error D:</div>);
-        }
-        console.log(e.target.elements[0].value);
-        console.log(e.target.elements[1].value)
-
+        
+        const username = (e.target as HTMLFormElement).elements[0].value;
+        const password = (e.target as HTMLFormElement).elements[1].value;
+    
         const result = await fetch("http://localhost:3000/log-in", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: "include",  // This sends the session cookie with the request
             body: JSON.stringify({
-                username: e.target.elements[0].value,
-                password: e.target.elements[1].value,
+                username: username,
+                password: password,
             }),
-        })
+        });
+
+        if (result.ok) {
+            navigateStudy();
+        }
     }
 
     return (
